@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="padding: 100px">
+<div class="alert alert-danger" role="alert" style="display: none">
+    该用户已存在，请更换用户昵称！
+</div>
+<div class="jumbotron">
+    <div class="container">
+        <h2 style="color: #286090">我们一起来聊天！！</h2>
+        <p></p>
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">用户昵称：</label>
+                <input type="text" class="form-control username" name="username" placeholder="用户昵称">
+            </div>
+            <p>
+                <button type="button" class="btn btn-primary btn-lg">Go Chart</button>
+            </p>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/jquery-2.1.4.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $(".btn").click(() => {
+            $.post("/check", {
+                "username": $(".username").val()
+            }, function (result) {
+                console.log(result)
+                if(result.err===-1){
+                   $(".alert").fadeIn(1000).html("请输入昵称！！！")
+                }
+               else if(result.err===-2){
+                    $(".alert").fadeIn(1000).html("该昵称被占用！！")
+                }
+            })
+        })
+    })
+</script>
+</html>
